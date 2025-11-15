@@ -9,8 +9,8 @@ import java.util.Optional;
 @Repository
 public interface TipoRolRepository extends JpaRepository<TipoRol, Long> {
 
-    // Este método es crucial. Spring lo crea solo por el nombre.
-    // Lo usaremos para buscar el rol "CLIENTE" o "OPERADOR"
-    // antes de crear un nuevo usuario.
+    
+    
+    
     Optional<TipoRol> findByNombre(String nombre);
 }

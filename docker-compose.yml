@@ -35,7 +35,7 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db-usuarios:5432/db_usuarios
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=admin
-      - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=http://keycloak:8080/realms/tpi-backend
+      #- SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=http://keycloak:8080/realms/tpi-backend
     depends_on:
       - db-usuarios
       - keycloak

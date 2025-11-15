@@ -9,6 +9,6 @@ public class CrearClienteRequestDTO {
     private String email;
     private String telefono;
 
-    // ID del usuario (creado previamente) al que se vinculará este cliente
+    
     private Long usuarioId;
 }

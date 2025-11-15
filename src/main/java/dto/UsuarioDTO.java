@@ -7,6 +7,6 @@ public class UsuarioDTO {
     private Long id;
     private String username;
     private String email;
-    private String tipoRolNombre; // Mostramos el nombre del rol
+    private String tipoRolNombre; 
     private String keycloakId;
 }

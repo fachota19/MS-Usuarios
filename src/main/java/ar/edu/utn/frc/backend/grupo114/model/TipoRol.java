@@ -13,7 +13,7 @@ public class TipoRol {
     private Long id;
 
     @Column(nullable = false, unique = true)
-    private String nombre; // Ej: CLIENTE, TRANSPORTISTA
+    private String nombre; 
 
     @Column
     private String descripcion;

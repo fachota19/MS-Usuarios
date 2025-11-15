@@ -9,6 +9,6 @@ public class ClienteDTO {
     private String apellido;
     private String email;
     private String telefono;
-    private Long usuarioId; // ID del usuario vinculado
-    private String username; // Nombre del usuario vinculado
+    private Long usuarioId; 
+    private String username; 
 }

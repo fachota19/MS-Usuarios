@@ -23,38 +23,27 @@ import java.util.stream.Collectors;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    /**
-     * Bean Principal de Configuración de Seguridad.
-     * Aquí definimos las REGLAS de acceso a los endpoints.
-     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                // Desactivamos CSRF porque usamos JWT (stateless)
                 .csrf(AbstractHttpConfigurer::disable)
 
-                // Definimos las reglas de autorización
+                // --- INICIO DEL ARREGLO ---
                 .authorizeHttpRequests(auth -> auth
-                        // Basado en tu PDF, todos los endpoints son solo para OPERADOR
-                        .requestMatchers("/usuarios", "/usuarios/**").hasRole("OPERADOR")
-                        .requestMatchers("/clientes", "/clientes/**").hasRole("OPERADOR")
-                        .requestMatchers("/transportistas", "/transportistas/**").hasRole("OPERADOR")
+                        // Cambiamos .hasRole("OPERADOR") por .hasAuthority("ROLE_OPERADOR")
+                        // para que coincida con el prefijo que agregamos en el conversor de abajo.
+                        .requestMatchers("/usuarios", "/usuarios/**").hasAuthority("ROLE_OPERADOR")
+                        .requestMatchers("/clientes", "/clientes/**").hasAuthority("ROLE_OPERADOR")
+                        .requestMatchers("/transportistas", "/transportistas/**").hasAuthority("ROLE_OPERADOR")
 
-                        // Cualquier otra petición (ej. /actuator/health)
-                        // solo pedimos que esté autenticada.
                         .anyRequest().authenticated()
                 )
+                // --- FIN DEL ARREGLO ---
 
-                // Le decimos a Spring que esto es un Servidor de Recursos OAuth2
-                // y que debe validar los tokens JWT.
                 .oauth2ResourceServer(oauth2 -> oauth2
-                        // Le decimos que use el "conversor" de JWT que definimos más abajo
-                        // para que entienda los roles de Keycloak.
                         .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter()))
                 )
 
-                // Le decimos a Spring que NO cree sesiones. Cada petición debe
-                // traer su propio token.
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 );
@@ -62,41 +51,26 @@ public class SecurityConfig {
         return http.build();
     }
 
-    /**
-     * Este Bean es CRUCIAL.
-     * Le "enseña" a Spring Security cómo leer los roles
-     * desde la estructura compleja de un token de Keycloak.
-     *
-     * Por defecto, Spring busca roles en un claim "scope", pero Keycloak
-     * los pone dentro de "realm_access" -> "roles".
-     */
     @Bean
     public JwtAuthenticationConverter jwtAuthenticationConverter() {
-        // Creamos un convertidor customizado para las "autoridades" (roles)
         Converter<Jwt, Collection<GrantedAuthority>> authoritiesConverter = jwt -> {
 
-            // 1. Obtenemos el claim "realm_access" del token JWT
             final Map<String, Object> realmAccess = (Map<String, Object>) jwt.getClaim("realm_access");
 
             if (realmAccess == null || realmAccess.isEmpty()) {
-                return List.of(); // No hay roles
+                return List.of();
             }
 
-            // 2. Obtenemos la lista de "roles" de adentro de "realm_access"
             final Collection<String> roles = (Collection<String>) realmAccess.get("roles");
 
-            // 3. Mapeamos la lista de strings de roles (ej: "OPERADOR")
-            //    a la clase que Spring Security entiende (SimpleGrantedAuthority)
-            //    Añadimos el prefijo "ROLE_" que Spring espera.
+            // Aquí es donde agregamos el prefijo "ROLE_"
             return roles.stream()
                     .map(roleName -> "ROLE_" + roleName) // Ej: "ROLE_OPERADOR"
                     .map(SimpleGrantedAuthority::new)
                     .collect(Collectors.toList());
         };
 
-        // Creamos el convertidor principal de JWT
         JwtAuthenticationConverter jwtConverter = new JwtAuthenticationConverter();
-        // Le asignamos nuestro convertidor de roles customizado
         jwtConverter.setJwtGrantedAuthoritiesConverter(authoritiesConverter);
 
         return jwtConverter;
