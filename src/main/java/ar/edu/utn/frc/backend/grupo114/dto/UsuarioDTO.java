@@ -1,14 +1,16 @@
 package ar.edu.utn.frc.backend.grupo114.dto;
 
-import lombok.Data;
+import lombok.*;
 
 @Data
-public class ClienteDTO {
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class UsuarioDTO {
+
     private Long id;
     private String nombre;
     private String apellido;
     private String email;
-    private String telefono;
-    private Long usuarioId; 
-    private String username; 
+    private String rol;
 }
