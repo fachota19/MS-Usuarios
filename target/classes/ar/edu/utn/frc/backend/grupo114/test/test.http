@@ -1,0 +1,174 @@
+### ============================
+###        HEALTH CHECK
+### ============================
+
+GET http://localhost:8082/api/usuarios
+Accept: application/json
+
+
+### ============================
+###   1. CREAR USUARIO (CLIENTE)
+### ============================
+
+POST http://localhost:8082/api/usuarios
+Content-Type: application/json
+
+{
+  "username": "user2",
+  "email": "user2@mail.com",
+  "rol": "CLIENTE"
+}
+
+### Guardar el ID del usuario creado manualmente:
+### ejemplo: @user1Id = 1
+
+
+
+### ============================
+###   2. CREAR CLIENTE LIGADO
+### ============================
+
+POST http://localhost:8082/api/clientes
+Content-Type: application/json
+
+{
+  "nombre": "Carlos",
+  "apellido": "Lopez",
+  "email": "carlos@mail.com",
+  "telefono": "3517770000",
+  "usuarioId": 10
+}
+
+
+
+### ============================
+### 3. OBTENER CLIENTE POR ID
+### ============================
+
+GET http://localhost:8082/api/clientes/4
+Accept: application/json
+
+
+
+### ============================
+### 4. CREAR USUARIO (TRANSPORTISTA)
+### ============================
+
+POST http://localhost:8082/api/usuarios
+Content-Type: application/json
+
+{
+  "username": "user11",
+  "email": "user2@mail.com",
+  "rol": "TRANSPORTISTA"
+}
+
+
+
+### ============================
+### 5. CREAR TRANSPORTISTA LIGADO
+### ============================
+
+POST http://localhost:8082/api/transportistas
+Content-Type: application/json
+
+{
+  "nombre": "Pedro",
+  "email": "pedro@mail.com",
+  "telefono": "3515551111",
+  "usuarioId": 9
+}
+
+
+
+### ============================
+### 6. GET DE TODOS
+### ============================
+
+GET http://localhost:8082/api/usuarios
+Accept: application/json
+
+###
+GET http://localhost:8082/api/clientes
+Accept: application/json
+
+###
+GET http://localhost:8082/api/transportistas
+Accept: application/json
+
+
+
+### ============================
+### 7. ERROR: USERNAME DUPLICADO
+### ============================
+
+POST http://localhost:8082/api/usuarios
+Content-Type: application/json
+
+{
+  "username": "user1",
+  "email": "otro@mail.com",
+  "rol": "CLIENTE"
+}
+
+
+
+### ============================
+### 8. ERROR: CLIENTE EXISTENTE
+### ============================
+
+POST http://localhost:8082/api/clientes
+Content-Type: application/json
+
+{
+  "nombre": "Carlos2",
+  "apellido": "Otro",
+  "email": "otro@mail.com",
+  "telefono": "123",
+  "usuarioId": 1
+}
+
+
+
+### ============================
+### 9. ERROR: ROL INEXISTENTE
+### ============================
+
+POST http://localhost:8082/api/usuarios
+Content-Type: application/json
+
+{
+  "username": "user-con-rol-invalido",
+  "email": "raro@mail.com",
+  "rol": "PAPAYA"
+}
+
+
+
+### ============================
+### 10. UPDATE DE USUARIO (si existe)
+### ============================
+
+PUT http://localhost:8082/api/usuarios/1
+Content-Type: application/json
+
+{
+  "email": "nuevo-user1@mail.com"
+}
+
+
+
+### ============================
+### 11. DELETE DE USUARIO (si existe)
+### ============================
+
+DELETE http://localhost:8082/api/usuarios/1
+
+
+
+### ============================
+### 12. VERIFICAR QUE SE BORRÓ
+### ============================
+
+GET http://localhost:8082/api/usuarios/1
+Accept: application/json

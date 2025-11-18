@@ -1,7 +1,10 @@
 package ar.edu.utn.frc.backend.grupo114.model;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "usuarios")
@@ -15,11 +18,16 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nombre;
-    private String apellido;
+    @Column(nullable = false, unique = true, length = 100)
+    private String username;
+
+    @Column(nullable = false, length = 255)
     private String email;
 
-    @ManyToOne
-    @JoinColumn(name = "rol_id")
+    @Column(name = "keycloak_id", length = 100)
+    private String keycloakId;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "tipo_rol_id", nullable = false)
     private TipoRol rol;
 }

@@ -9,11 +9,12 @@ C:\proyectos\TPI\TPI-Backend---Grupo-114\MS-Usuarios\src\main\java\ar\edu\utn\fr
 C:\proyectos\TPI\TPI-Backend---Grupo-114\MS-Usuarios\src\main\java\ar\edu\utn\frc\backend\grupo114\model\Cliente.java
 C:\proyectos\TPI\TPI-Backend---Grupo-114\MS-Usuarios\src\main\java\ar\edu\utn\frc\backend\grupo114\MsUsuariosApplication.java
 C:\proyectos\TPI\TPI-Backend---Grupo-114\MS-Usuarios\src\main\java\ar\edu\utn\frc\backend\grupo114\repository\TransportistaRepository.java
+C:\proyectos\TPI\TPI-Backend---Grupo-114\MS-Usuarios\src\main\java\ar\edu\utn\frc\backend\grupo114\service\impl\UsuarioServiceImpl.java
 C:\proyectos\TPI\TPI-Backend---Grupo-114\MS-Usuarios\src\main\java\ar\edu\utn\frc\backend\grupo114\dto\ClienteDTO.java
 C:\proyectos\TPI\TPI-Backend---Grupo-114\MS-Usuarios\src\main\java\ar\edu\utn\frc\backend\grupo114\dto\UsuarioDTO.java
 C:\proyectos\TPI\TPI-Backend---Grupo-114\MS-Usuarios\src\main\java\ar\edu\utn\frc\backend\grupo114\model\TipoRol.java
+C:\proyectos\TPI\TPI-Backend---Grupo-114\MS-Usuarios\src\main\java\ar\edu\utn\frc\backend\grupo114\exception\GlobalExceptionHandler.java
 C:\proyectos\TPI\TPI-Backend---Grupo-114\MS-Usuarios\src\main\java\ar\edu\utn\frc\backend\grupo114\dto\TransportistaDTO.java
-C:\proyectos\TPI\TPI-Backend---Grupo-114\MS-Usuarios\src\main\java\ar\edu\utn\frc\backend\grupo114\config\SecurityConfig.java
 C:\proyectos\TPI\TPI-Backend---Grupo-114\MS-Usuarios\src\main\java\ar\edu\utn\frc\backend\grupo114\dto\CrearTransportistaRequestDTO.java
 C:\proyectos\TPI\TPI-Backend---Grupo-114\MS-Usuarios\src\main\java\ar\edu\utn\frc\backend\grupo114\repository\ClienteRepository.java
 C:\proyectos\TPI\TPI-Backend---Grupo-114\MS-Usuarios\src\main\java\ar\edu\utn\frc\backend\grupo114\repository\TipoRolRepository.java

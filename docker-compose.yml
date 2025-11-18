@@ -1,18 +1,25 @@
 version: '3.8'
 
 services:
+
+  # ============================
+  # 🔐 KEYCLOAK - Seguridad OAuth2
+  # ============================
   keycloak:
     image: quay.io/keycloak/keycloak:24.0.3
     container_name: keycloak
     command: start-dev
     ports:
-      - "8081:8080"
+      - "8081:8080"        # Keycloak expuesto en localhost:8081
     environment:
-      - KEYCLOAK_ADMIN=admin
-      - KEYCLOAK_ADMIN_PASSWORD=admin123
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin123
     volumes:
       - keycloak_data:/opt/keycloak/data
 
+  # ============================
+  # 🗄️ Base de Datos - Usuarios
+  # ============================
   db-usuarios:
     image: postgres:15-alpine
     container_name: db_usuarios
@@ -21,25 +28,31 @@ services:
       POSTGRES_PASSWORD: admin
       POSTGRES_DB: db_usuarios
     ports:
-      - "5433:5432"
+      - "5433:5432"        # Postgres expuesto en localhost:5433
     volumes:
       - postgres_data_usuarios:/var/lib/postgresql/data
 
+  # ============================
+  # 👥 Microservicio Usuarios
+  # ============================
   ms-usuarios:
     build: .
     container_name: ms-usuarios
     ports:
-      - "8082:8082"
+      - "8082:8082"        # Microservicio expuesto en localhost:8082
     environment:
-      - SERVER_PORT=8082
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db-usuarios:5432/db_usuarios
-      - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=admin
-      #- SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=http://keycloak:8080/realms/tpi-backend
+      SERVER_PORT: 8082
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db-usuarios:5432/db_usuarios
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: admin
+      # SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=http://keycloak:8080/realms/tpi-backend
     depends_on:
       - db-usuarios
       - keycloak
 
+  # ============================
+  # 🖥️ PgAdmin4
+  # ============================
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin
@@ -51,6 +64,9 @@ services:
     depends_on:
       - db-usuarios
 
+# ============================
+# 📦 Volúmenes persistentes
+# ============================
 volumes:
   keycloak_data:
   postgres_data_usuarios:
