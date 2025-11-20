@@ -1,174 +1,61 @@
-### ============================
-###        HEALTH CHECK
-### ============================
+### Variables comunes
+@baseUrl = http://localhost:8080/api
+@token = eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJrLVdBRU9EVnI5ZkZGSnV6SGdRQnRBMDJVYnBYTzM2eEhxZWlmcFl2aHVjIn0.eyJleHAiOjE3NjM2NjI0NzgsImlhdCI6MTc2MzY2MjE3OCwianRpIjoiMGMwYjBkNDEtOGE0Ny00YmNkLWI0ZmUtMTRmNGVmOGIyYmVhIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgxL3JlYWxtcy90cGktYmFja2VuZCIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiI5MmU0ZDJmOS1jMTUwLTQ3ZTUtOTQ5Yi00MTc5YjgxYWViOTgiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJmcm9udGVuZC10cGkiLCJzZXNzaW9uX3N0YXRlIjoiMjI5YWEwNDctNTFiMi00ZmJhLWE3OTktNWMxZDA2NmMxNDY3IiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyJodHRwOi8vbG9jYWxob3N0OjUxNzQiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iLCJPUEVSQURPUiIsImRlZmF1bHQtcm9sZXMtdHBpLWJhY2tlbmQiXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiIyMjlhYTA0Ny01MWIyLTRmYmEtYTc5OS01YzFkMDY2YzE0NjciLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6Imp1YW4gY3J1eiIsInByZWZlcnJlZF91c2VybmFtZSI6Imp1YW4iLCJnaXZlbl9uYW1lIjoianVhbiIsImZhbWlseV9uYW1lIjoiY3J1eiIsImVtYWlsIjoianVhbkB0ZXN0LmNvbSJ9.VEITDnKj7P38Ee1ps37lM-VfsPMFXHGA-QiNws6pVWUh5OLZ3fbM2PrK4fNrMU8SWhfDmdaKgrExkOitHXwBFxE94nAuTxREb0udV9dYNphX1es6D_1rlSb4fcFkSTxtTTy1qiwkh3DooVfYLxqjlw7R2VvaydY9XHSaOTtdcxY7l6tloH9v-ip3JZ6uz7LshtA0oeJAwIdUkYADQ_iRCv3cV7aZzOudiGZ0SpjtHc9G3NxA7MefZkZX3usDOnEpAOJ0ENuoW2PJLXF49VDfHbyr8fiO9mR3fhPn0-F6FWpw6VJ-m9rGpVvkUq-DTR4GkQ37JCAxFj0mjeH6pQNonQ
 
-GET http://localhost:8082/api/usuarios
-Accept: application/json
-
-
-### ============================
-###   1. CREAR USUARIO (CLIENTE)
-### ============================
-
-POST http://localhost:8082/api/usuarios
-Content-Type: application/json
-
-{
-  "username": "user2",
-  "email": "user2@mail.com",
-  "rol": "CLIENTE"
-}
-
-### Guardar el ID del usuario creado manualmente:
-### ejemplo: @user1Id = 1
-
-
-
-### ============================
-###   2. CREAR CLIENTE LIGADO
-### ============================
-
-POST http://localhost:8082/api/clientes
-Content-Type: application/json
-
-{
-  "nombre": "Carlos",
-  "apellido": "Lopez",
-  "email": "carlos@mail.com",
-  "telefono": "3517770000",
-  "usuarioId": 10
-}
-
-
-
-### ============================
-### 3. OBTENER CLIENTE POR ID
-### ============================
-
-GET http://localhost:8082/api/clientes/4
-Accept: application/json
-
-
-
-### ============================
-### 4. CREAR USUARIO (TRANSPORTISTA)
-### ============================
-
-POST http://localhost:8082/api/usuarios
-Content-Type: application/json
-
-{
-  "username": "user11",
-  "email": "user2@mail.com",
-  "rol": "TRANSPORTISTA"
-}
-
-
-
-### ============================
-### 5. CREAR TRANSPORTISTA LIGADO
-### ============================
-
-POST http://localhost:8082/api/transportistas
-Content-Type: application/json
-
-{
-  "nombre": "Pedro",
-  "email": "pedro@mail.com",
-  "telefono": "3515551111",
-  "usuarioId": 9
-}
-
-
-
-### ============================
-### 6. GET DE TODOS
-### ============================
-
-GET http://localhost:8082/api/usuarios
-Accept: application/json
+### Listar usuarios
+GET {{baseUrl}}/usuarios
+Authorization: Bearer {{token}}
 
 ###
-GET http://localhost:8082/api/clientes
-Accept: application/json
+
+### Crear usuario
+POST {{baseUrl}}/usuarios
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "username": "operador1",
+  "email": "operador1@empresa.com",
+  "tipoRolId": 1
+}
 
 ###
-GET http://localhost:8082/api/transportistas
-Accept: application/json
 
+### Listar clientes
+GET {{baseUrl}}/clientes
+Authorization: Bearer {{token}}
 
+###
 
-### ============================
-### 7. ERROR: USERNAME DUPLICADO
-### ============================
-
-POST http://localhost:8082/api/usuarios
+### Crear cliente
+POST {{baseUrl}}/clientes
+Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-  "username": "user1",
-  "email": "otro@mail.com",
-  "rol": "CLIENTE"
+  "nombre": "Juan",
+  "apellido": "Pérez",
+  "email": "juan.perez@cliente.com",
+  "telefono": "+54 9 351 5555555",
+  "usuarioId": 2
 }
 
+###
 
+### Listar transportistas
+GET {{baseUrl}}/transportistas
+Authorization: Bearer {{token}}
 
-### ============================
-### 8. ERROR: CLIENTE EXISTENTE
-### ============================
+###
 
-POST http://localhost:8082/api/clientes
+### Crear transportista
+POST {{baseUrl}}/transportistas
+Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-  "nombre": "Carlos2",
-  "apellido": "Otro",
-  "email": "otro@mail.com",
-  "telefono": "123",
-  "usuarioId": 1
+  "nombre": "Transportes López",
+  "telefono": "+54 9 351 4444444",
+  "email": "contacto@transporteslopez.com",
+  "usuarioId": 3
 }
-
-
-
-### ============================
-### 9. ERROR: ROL INEXISTENTE
-### ============================
-
-POST http://localhost:8082/api/usuarios
-Content-Type: application/json
-
-{
-  "username": "user-con-rol-invalido",
-  "email": "raro@mail.com",
-  "rol": "PAPAYA"
-}
-
-
-
-### ============================
-### 10. UPDATE DE USUARIO (si existe)
-### ============================
-
-PUT http://localhost:8082/api/usuarios/1
-Content-Type: application/json
-
-{
-  "email": "nuevo-user1@mail.com"
-}
-
-
-
-### ============================
-### 11. DELETE DE USUARIO (si existe)
-### ============================
-
-DELETE http://localhost:8082/api/usuarios/1
-
-
-
-### ============================
-### 12. VERIFICAR QUE SE BORRÓ
-### ============================
-
-GET http://localhost:8082/api/usuarios/1
-Accept: application/json
