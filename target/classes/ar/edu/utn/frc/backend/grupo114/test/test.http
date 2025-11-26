@@ -1,0 +1,61 @@
+### Variables comunes
+@baseUrl = http://localhost:8080/api
+@token = eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJrLVdBRU9EVnI5ZkZGSnV6SGdRQnRBMDJVYnBYTzM2eEhxZWlmcFl2aHVjIn0.eyJleHAiOjE3NjM2NjI0NzgsImlhdCI6MTc2MzY2MjE3OCwianRpIjoiMGMwYjBkNDEtOGE0Ny00YmNkLWI0ZmUtMTRmNGVmOGIyYmVhIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgxL3JlYWxtcy90cGktYmFja2VuZCIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiI5MmU0ZDJmOS1jMTUwLTQ3ZTUtOTQ5Yi00MTc5YjgxYWViOTgiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJmcm9udGVuZC10cGkiLCJzZXNzaW9uX3N0YXRlIjoiMjI5YWEwNDctNTFiMi00ZmJhLWE3OTktNWMxZDA2NmMxNDY3IiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyJodHRwOi8vbG9jYWxob3N0OjUxNzQiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iLCJPUEVSQURPUiIsImRlZmF1bHQtcm9sZXMtdHBpLWJhY2tlbmQiXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiIyMjlhYTA0Ny01MWIyLTRmYmEtYTc5OS01YzFkMDY2YzE0NjciLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6Imp1YW4gY3J1eiIsInByZWZlcnJlZF91c2VybmFtZSI6Imp1YW4iLCJnaXZlbl9uYW1lIjoianVhbiIsImZhbWlseV9uYW1lIjoiY3J1eiIsImVtYWlsIjoianVhbkB0ZXN0LmNvbSJ9.VEITDnKj7P38Ee1ps37lM-VfsPMFXHGA-QiNws6pVWUh5OLZ3fbM2PrK4fNrMU8SWhfDmdaKgrExkOitHXwBFxE94nAuTxREb0udV9dYNphX1es6D_1rlSb4fcFkSTxtTTy1qiwkh3DooVfYLxqjlw7R2VvaydY9XHSaOTtdcxY7l6tloH9v-ip3JZ6uz7LshtA0oeJAwIdUkYADQ_iRCv3cV7aZzOudiGZ0SpjtHc9G3NxA7MefZkZX3usDOnEpAOJ0ENuoW2PJLXF49VDfHbyr8fiO9mR3fhPn0-F6FWpw6VJ-m9rGpVvkUq-DTR4GkQ37JCAxFj0mjeH6pQNonQ
+
+### Listar usuarios
+GET {{baseUrl}}/usuarios
+Authorization: Bearer {{token}}
+
+###
+
+### Crear usuario
+POST {{baseUrl}}/usuarios
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "username": "operador1",
+  "email": "operador1@empresa.com",
+  "tipoRolId": 1
+}
+
+###
+
+### Listar clientes
+GET {{baseUrl}}/clientes
+Authorization: Bearer {{token}}
+
+###
+
+### Crear cliente
+POST {{baseUrl}}/clientes
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "nombre": "Juan",
+  "apellido": "Pérez",
+  "email": "juan.perez@cliente.com",
+  "telefono": "+54 9 351 5555555",
+  "usuarioId": 2
+}
+
+###
+
+### Listar transportistas
+GET {{baseUrl}}/transportistas
+Authorization: Bearer {{token}}
+
+###
+
+### Crear transportista
+POST {{baseUrl}}/transportistas
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "nombre": "Transportes López",
+  "telefono": "+54 9 351 4444444",
+  "email": "contacto@transporteslopez.com",
+  "usuarioId": 3
+}
